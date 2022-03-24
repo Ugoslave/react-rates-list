@@ -14,11 +14,16 @@ const Footer = () => {
         <li className="footer__item">
           <a href="https://forex.finam.ru/" target="_blank" className="footer__link">ФИНАМ</a>
         </li>
+      </ul>
+      <ul className="footer__link-box">
         <li className="footer__item">
           <a href="https://alfaforex.ru/analytics/" target="_blank" className="footer__link">Аналитика от Aльфа Форекс</a>
         </li>
         <li className="footer__item">
           <a href="https://www.tinkoff.ru/invest/research/" target="_blank" className="footer__link">Аналитика от Tinkoff</a>
+        </li>
+        <li className="footer__item">
+          <a href="https://indexaco.com/ru/analytics" target="_blank" className="footer__link">Аналитика от IndexaCo</a>
         </li>
       </ul>
     </footer>
