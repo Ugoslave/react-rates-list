@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import DataRow from '../DataRow/DataRow';
 import Footer from '../Footer/Footer';
+import RateCard from '../RateCard/RateCard';
 import api from '../../utils/api';
 import dataLoader from '../../img/loader.gif';
 
@@ -28,22 +29,25 @@ const App = () => {
 
 
   return (
-    <div className="app">
-      <Header />
-      <section className="data-box">
-        <ul className="rates-list">
-        {rates.map((item) => {
-            return (
-              <DataRow
-                key={item.ID}
-                rate={item}
-              />
-            );
-          })}
-        </ul>
-      </section>
-      <Footer />
-    </div>
+    <>
+      <div className="app">
+        <Header />
+        <section className="data-box">
+          <ul className="rates-list">
+            {rates.map((item) => {
+              return (
+                <DataRow
+                  key={item.ID}
+                  rate={item}
+                />
+              );
+            })}
+          </ul>
+        </section>
+        <Footer />
+      </div>
+      <RateCard />
+    </>
   );
 }
 

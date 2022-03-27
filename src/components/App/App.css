@@ -21,18 +21,21 @@
   }
 }
 
-.app__text {
-  font-family: 'Euclid Circular A';
-  font-weight: 600;
-  font-size: 3em;
-}
-
 .data-box {
-  padding: 50px 200px 100px;
+  padding: 30px 200px 20px;
   box-sizing: border-box;
 }
 
 .rates-list {
   padding: 0;
   list-style: none;
+  height: 500px;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.rates-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
