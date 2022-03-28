@@ -7,6 +7,15 @@
   }
 }
 
+@keyframes arrow-move {
+  from {
+    transform: rotate(30deg);
+  }
+  to {
+    transform: rotate(70deg);
+  }
+}
+
 .card {
   width: 100%;
   min-height: 100%;
@@ -89,14 +98,6 @@
   font-size: 2.5em;
 }
 
-.rate-card__timestamp {
-  margin: 0;
-  padding-top: 20px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 2em;
-}
-
 .rate-card__code-box {
   margin: 0;
   width: 80%;
@@ -118,6 +119,7 @@
   padding-left: 30px;
   width: 70px;
   height: 70px;
+  animation: arrow-move 5s alternate infinite ease-in-out;
 }
 
 .rate-card__code {
@@ -130,6 +132,8 @@
 
 .rate-card__code:first-child {
   padding-top: 0;
+  color: mintcream;
+  text-shadow: 2px 2px 15px #00BFFF;
 }
 
 .rate-card__previous-rate-title {

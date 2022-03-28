@@ -11,7 +11,7 @@ import './App.css';
 
 
 const App = () => {
-
+  const [selectedCard, setSelectedCard] = React.useState(null);
   const [rates, setRates] = React.useState([{
     CharCode: "Please, waiting...",
     Value: "Please, waiting...",
@@ -27,6 +27,13 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const handleCardClick = (selectedCard) => {
+    setSelectedCard(selectedCard);
+  }
+
+  const closeCard = () => {
+    setSelectedCard(null);
+  }
 
   return (
     <>
@@ -39,6 +46,7 @@ const App = () => {
                 <DataRow
                   key={item.ID}
                   rate={item}
+                  onRowClick={handleCardClick}
                 />
               );
             })}
@@ -46,7 +54,10 @@ const App = () => {
         </section>
         <Footer />
       </div>
-      <RateCard />
+      <RateCard
+        card={selectedCard}
+        onClose={closeCard}
+      />
     </>
   );
 }
