@@ -1,7 +1,6 @@
 class Api {  // создаем и экспортируем класс работы с API
   constructor(dataConfig) {
     this._url = dataConfig.url;
-    this._headers = dataConfig.headers;
   }
 
   _checkResponse(res) { // создаем приватный метод для обработки ошибок
@@ -17,8 +16,8 @@ class Api {  // создаем и экспортируем класс работ
              .then(this._checkResponse);
   }
 
-  getArchiveRates() {  // метод получения архивных котировок с сервера
-    return fetch(`${this._url}archive/2022/02/11/daily_json.js`)
+  getArchiveRates = (date) => {  // метод получения архивных котировок с сервера
+    return fetch(`${this._url}archive/${date}/daily_json.js`)
              .then(this._checkResponse);
   }
 }

@@ -1,3 +1,5 @@
+import React from 'react';
+import api from '../../utils/api';
 import closeBtn from '../../img/card-close-button.svg';
 import downArrow from '../../img/rate-card-down-arrow.png';
 import upArrow from '../../img/rate-card-up-arrow.png';
@@ -5,8 +7,47 @@ import upArrow from '../../img/rate-card-up-arrow.png';
 import './RateCard.css';
 
 const RateCard = ({ card, onClose }) => {
+
+  let dates = [];
+  let rates = [];
+
+
+
+  const createDates = () => {
+
+    const createDay = (day) => {
+      const date = new Date();
+      date.setDate(date.getDate() - day);
+
+      return date.getFullYear() + '/' + (date.getMonth() < 10 ? '0' + Number(date.getMonth() + 1) : Number(date.getMonth() +1)) + '/' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      dates[i-1] = createDay(i);
+    }
+
+    console.log(dates);
+  }
+
+  createDates();
+
+
+  React.useEffect(() => {
+    for (let i = 0; i < 10; i++) {
+      api
+        .getArchiveRates(dates[i])
+        .then((res) => {
+          console.log(res.Valute);
+        })
+        .catch((err) => console.log(err));
+
+
+
+    }
+  }, []);
+
   return (
-    <div className={`card ${card && "card_active"}`}>
+    <div className={card ? "card  card_active" : "card"}>
       <div className="card__container">
         <button
           type="button"
@@ -24,7 +65,7 @@ const RateCard = ({ card, onClose }) => {
             {`${card ? card.Nominal : ''} ${card ? card.Name : ''}`}
           </h2>
           <p className="rate-card__subtitle">
-            {`${card ? card.Value : ''} рублей`}
+            {`${card ? (card.Value).toFixed(2) : ''} рублей`}
           </p>
           <div className="rate-card__code-box">
             <ul className="rate-card__list">
@@ -46,7 +87,7 @@ const RateCard = ({ card, onClose }) => {
                   ${card ? Math.abs((((card.Previous - card.Value) / card.Value) * 100).toFixed(3)) : ''} %`}
               </li>
               <li className="rate-card__code">
-                {card ? card.Previous : ''}
+                {card ? (card.Previous).toFixed(2) : ''}
               </li>
             </ul>
           </div>

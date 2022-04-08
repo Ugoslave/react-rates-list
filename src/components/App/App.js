@@ -11,7 +11,7 @@ import './App.css';
 
 
 const App = () => {
-  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [selectedCard, setSelectedCard] = React.useState('');
   const [rates, setRates] = React.useState([{
     CharCode: "Please, waiting...",
     Value: "Please, waiting...",
