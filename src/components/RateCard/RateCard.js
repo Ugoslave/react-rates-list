@@ -12,7 +12,6 @@ const RateCard = ({ card, onClose }) => {
   let rates = [];
 
 
-
   const createDates = () => {
 
     const createDay = (day) => {
@@ -25,26 +24,39 @@ const RateCard = ({ card, onClose }) => {
     for (let i = 1; i <= 10; i++) {
       dates[i-1] = createDay(i);
     }
-
-    console.log(dates);
   }
 
-  createDates();
 
+
+  const getPrevRates = () => {
+    for (let i of dates) {
+      api
+    .getArchiveRates(dates[i])
+    .then((res) => {
+      const arr = Object.values(res.Valute).map(i => Object.values(i));
+      const newArr = arr.map((item) => {
+        return {
+          'char': item[2],
+          'rate': item[5],
+        }
+      });
+
+      const item = newArr.filter((i) => i.char === card.CharCode)[0];
+      rates[i] = item;
+    })
+    .catch((err) => console.log(err));
+    }
+
+    console.log(rates);
+
+  }
 
   React.useEffect(() => {
-    for (let i = 0; i < 10; i++) {
-      api
-        .getArchiveRates(dates[i])
-        .then((res) => {
-          console.log(res.Valute);
-        })
-        .catch((err) => console.log(err));
+    createDates();
+    getPrevRates();
+  }, [card]);
 
 
-
-    }
-  }, []);
 
   return (
     <div className={card ? "card  card_active" : "card"}>
