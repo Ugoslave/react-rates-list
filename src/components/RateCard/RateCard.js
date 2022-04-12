@@ -9,7 +9,9 @@ import './RateCard.css';
 const RateCard = ({ card, onClose }) => {
 
   let dates = [];
-  let rates = [];
+  let al = [];
+
+  const [rates, setRates] = React.useState([])
 
 
   const createDates = () => {
@@ -31,7 +33,7 @@ const RateCard = ({ card, onClose }) => {
   const getPrevRates = () => {
     for (let i of dates) {
       api
-    .getArchiveRates(dates[i])
+    .getArchiveRates(i)
     .then((res) => {
       const arr = Object.values(res.Valute).map(i => Object.values(i));
       const newArr = arr.map((item) => {
@@ -41,19 +43,29 @@ const RateCard = ({ card, onClose }) => {
         }
       });
 
-      const item = newArr.filter((i) => i.char === card.CharCode)[0];
-      rates[i] = item;
+      const item = card ? newArr.filter((i) => i.char === card.CharCode)[0] : null;
+
+      setRates([item, ... rates])
+
+
     })
-    .catch((err) => console.log(err));
+    .catch(() => {
+      console.log(`За ${i} курс недоступен`);
+    });
+
+
     }
-
-    console.log(rates);
-
   }
 
+  console.log(rates);
+
+
   React.useEffect(() => {
-    createDates();
-    getPrevRates();
+
+    if (card){
+      createDates();
+      getPrevRates();
+    }
   }, [card]);
 
 
@@ -105,16 +117,16 @@ const RateCard = ({ card, onClose }) => {
           </div>
           <p className="rate-card__previous-rate-title">за последние 10 дней:</p>
           <ul className="rate-card__rates-list">
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
-            <li className="rate-card__rate"><span className="rate-card__date">22.03.2022</span>346</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
+            <li className="rate-card__rate">{rates.rate}</li>
           </ul>
         </div>
       </div>
