@@ -31,6 +31,9 @@ const RateCard = ({ card, onClose }) => {
 
 
   const getPrevRates = () => {
+
+    let arr = [];
+
     for (let i of dates) {
       api
     .getArchiveRates(i)
@@ -45,7 +48,7 @@ const RateCard = ({ card, onClose }) => {
 
       const item = card ? newArr.filter((i) => i.char === card.CharCode)[0] : null;
 
-      setRates([item, ... rates])
+      arr.push(item);
 
 
     })
@@ -55,10 +58,11 @@ const RateCard = ({ card, onClose }) => {
 
 
     }
+
+    setRates(arr);
   }
 
   console.log(rates);
-
 
   React.useEffect(() => {
 
